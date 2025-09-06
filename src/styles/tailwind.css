@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #FAFAFA; /* warm off-white */
+    --color-foreground: #1E293B; /* rich charcoal */
+    --color-border: #E2E8F0; /* light slate */
+    --color-input: #FFFFFF; /* pure white */
+    --color-ring: #2563EB; /* deep blue */
+    
+    /* Card Colors */
+    --color-card: #FFFFFF; /* pure white */
+    --color-card-foreground: #1E293B; /* rich charcoal */
+    
+    /* Popover Colors */
+    --color-popover: #FFFFFF; /* pure white */
+    --color-popover-foreground: #1E293B; /* rich charcoal */
+    
+    /* Muted Colors */
+    --color-muted: #F8FAFC; /* very light slate */
+    --color-muted-foreground: #64748B; /* medium slate */
+    
+    /* Primary Colors */
+    --color-primary: #2563EB; /* deep blue */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #64748B; /* sophisticated slate */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Destructive Colors */
+    --color-destructive: #DC2626; /* clear red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #10B981; /* energizing emerald */
+    --color-accent-foreground: #FFFFFF; /* white */
+    
+    /* Success Colors */
+    --color-success: #059669; /* deeper emerald */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    /* Warning Colors */
+    --color-warning: #D97706; /* warm amber */
+    --color-warning-foreground: #FFFFFF; /* white */
+    
+    /* Error Colors */
+    --color-error: #DC2626; /* clear red */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    /* Surface Color */
+    --color-surface: #FFFFFF; /* pure white */
+    
+    /* Text Colors */
+    --color-text-primary: #1E293B; /* rich charcoal */
+    --color-text-secondary: #64748B; /* medium slate */
+    
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body, p, span, div {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  /* Custom shadow utilities for three-tier elevation system */
+  .shadow-tier-1 {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .shadow-tier-2 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-tier-3 {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Hover elevation transitions */
+  .hover-elevate {
+    transition: box-shadow 150ms ease-out;
+  }
+  
+  .hover-elevate:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Status indicator borders */
+  .status-border-applied {
+    border-left: 3px solid var(--color-primary);
+  }
+  
+  .status-border-interview {
+    border-left: 3px solid var(--color-warning);
+  }
+  
+  .status-border-offer {
+    border-left: 3px solid var(--color-success);
+  }
+  
+  .status-border-rejected {
+    border-left: 3px solid var(--color-destructive);
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 200ms ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 200ms ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
