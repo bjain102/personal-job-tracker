@@ -7,3 +7,4 @@ package-lock.json
 .idea/
 vite.config.*s.*
 *.env
+client_secret_.apps.googleusercontent.com.json
