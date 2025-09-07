@@ -174,11 +174,11 @@ const JobFormFields = ({
             type="button"
             variant="ghost"
             size="sm"
-            iconName="Target"
+            iconName="Send"
             iconPosition="left"
-            onClick={() => handleInputChange('status', 'wishlist')}
+            onClick={() => handleInputChange('status', 'applied')}
           >
-            Wishlist
+            Applied
           </Button>
         </div>
       </div>
