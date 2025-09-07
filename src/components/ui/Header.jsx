@@ -59,7 +59,7 @@ const Header = () => {
                 Job Tracker
               </h1>
               <span className="text-xs text-text-secondary font-mono">
-                v2.1.0
+                v1.0
               </span>
             </div>
           </div>
@@ -84,17 +84,6 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="flex items-center space-x-3">
-          {/* Quick Add Button */}
-          <Button
-            variant="default"
-            size="sm"
-            iconName="Plus"
-            iconPosition="left"
-            className="hidden sm:flex"
-            onClick={() => window.location.href = '/add-edit-job-modal'}
-          >
-            Add Job
-          </Button>
 
           {/* Notifications */}
           <button className="relative p-2 text-text-secondary hover:text-text-primary hover:bg-muted rounded-lg transition-colors duration-150">
@@ -165,21 +154,6 @@ const Header = () => {
                 {item?.label}
               </a>
             ))}
-            <div className="pt-2 border-t border-border">
-              <Button
-                variant="default"
-                size="sm"
-                iconName="Plus"
-                iconPosition="left"
-                fullWidth
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  window.location.href = '/add-edit-job-modal';
-                }}
-              >
-                Add Job
-              </Button>
-            </div>
           </nav>
         </div>
       )}
