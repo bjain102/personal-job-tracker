@@ -56,7 +56,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-semibold text-text-primary leading-none">
-                Job Tracker
+                JobTrackr
               </h1>
               <span className="text-xs text-text-secondary font-mono">
                 v1.0
