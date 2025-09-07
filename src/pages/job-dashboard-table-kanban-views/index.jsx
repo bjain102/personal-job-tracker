@@ -175,6 +175,58 @@ const JobDashboard = () => {
     setFilters(newFilters);
   };
 
+  const handleQuickStatsFilter = (filterCriteria) => {
+    // Reset existing filters first
+    const newFilters = {
+      status: '',
+      dateRange: '',
+      startDate: '',
+      endDate: '',
+      company: '',
+      location: ''
+    };
+
+    if (Array.isArray(filterCriteria.status)) {
+      // For multiple statuses, we'll need to modify the filtering logic
+      newFilters.multipleStatuses = filterCriteria.status;
+    } else if (filterCriteria.status) {
+      newFilters.status = filterCriteria.status;
+    }
+
+    if (filterCriteria.applicationDateFrom) {
+      newFilters.dateRange = 'custom';
+      newFilters.startDate = filterCriteria.applicationDateFrom.toISOString().split('T')[0];
+    }
+
+    if (filterCriteria.needsFollowUp) {
+      newFilters.needsFollowUp = true;
+    }
+
+    setFilters(newFilters);
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      status: '',
+      dateRange: '',
+      startDate: '',
+      endDate: '',
+      company: '',
+      location: ''
+    });
+    setSearchQuery('');
+  };
+
+  const hasActiveFilters = () => {
+    return filters.status || 
+           filters.multipleStatuses || 
+           filters.needsFollowUp || 
+           filters.dateRange || 
+           filters.company || 
+           filters.location || 
+           searchQuery;
+  };
+
   const handleSearchChange = (e) => {
     setSearchQuery(e?.target?.value);
   };
@@ -197,9 +249,34 @@ const JobDashboard = () => {
         }
       }
 
-      // Status filter
-      if (filters?.status && job?.status !== filters?.status) {
+      // Multiple statuses filter (for Applications Made card)
+      if (filters?.multipleStatuses) {
+        if (!filters.multipleStatuses.includes(job?.status)) {
+          return false;
+        }
+      }
+      // Single status filter
+      else if (filters?.status && job?.status !== filters?.status) {
         return false;
+      }
+
+      // Follow-up filter (for Pending Follow-ups card)
+      if (filters?.needsFollowUp && job?.status === 'applied') {
+        const today = new Date();
+        let needsFollowUp = false;
+        
+        if (job?.followUpDate) {
+          const followUpDate = new Date(job.followUpDate);
+          needsFollowUp = followUpDate <= today;
+        } else if (job?.applicationDate) {
+          const appDate = new Date(job.applicationDate);
+          const oneWeekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+          needsFollowUp = appDate <= oneWeekAgo;
+        }
+        
+        if (!needsFollowUp) {
+          return false;
+        }
       }
 
       // Company filter
@@ -290,8 +367,30 @@ const JobDashboard = () => {
 
           {/* Quick Stats */}
           <div className="mb-6">
-            <QuickStats jobs={filteredJobs} />
+            <QuickStats jobs={jobs} onFilterChange={handleQuickStatsFilter} />
           </div>
+
+          {/* Filter Status Banner */}
+          {hasActiveFilters() && (
+            <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Icon name="Filter" size={16} className="text-blue-600" />
+                <span className="text-sm text-blue-800 font-medium">
+                  Filters applied - Showing {filteredJobs.length} of {jobs.length} jobs
+                </span>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                iconName="X"
+                iconPosition="left"
+                onClick={resetFilters}
+                className="text-blue-600 border-blue-300 hover:bg-blue-100"
+              >
+                Reset Filters
+              </Button>
+            </div>
+          )}
 
           {/* Search Bar with Controls */}
           <div className="mb-6">
@@ -318,6 +417,18 @@ const JobDashboard = () => {
                 >
                   Filters
                 </Button>
+                {hasActiveFilters() && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    iconName="RotateCcw"
+                    iconPosition="left"
+                    onClick={resetFilters}
+                    className="text-blue-600 border-blue-300 hover:bg-blue-100"
+                  >
+                    Reset
+                  </Button>
+                )}
                 <Button
                   variant="default"
                   size="sm"
