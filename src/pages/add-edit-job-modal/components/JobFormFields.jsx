@@ -142,6 +142,47 @@ const JobFormFields = ({
           </div>
         </div>
       </div>
+
+      {/* Quick Actions */}
+      <div className="bg-muted rounded-lg p-4">
+        <h4 className="text-sm font-medium text-text-primary mb-3">Quick Actions</h4>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            iconName="Calendar"
+            iconPosition="left"
+            onClick={() => {
+              const today = new Date()?.toISOString()?.split('T')?.[0];
+              handleInputChange('applicationDate', today);
+            }}
+          >
+            Set Today
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            iconName="MapPin"
+            iconPosition="left"
+            onClick={() => handleInputChange('location', 'Remote')}
+          >
+            Remote
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            iconName="Target"
+            iconPosition="left"
+            onClick={() => handleInputChange('status', 'wishlist')}
+          >
+            Wishlist
+          </Button>
+        </div>
+      </div>
+
       {/* Application Details Section */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-text-primary border-b border-border pb-2">
@@ -215,45 +256,6 @@ const JobFormFields = ({
           {errors?.notes && (
             <p className="text-sm text-error mt-1">{errors?.notes}</p>
           )}
-        </div>
-      </div>
-      {/* Quick Actions */}
-      <div className="bg-muted rounded-lg p-4">
-        <h4 className="text-sm font-medium text-text-primary mb-3">Quick Actions</h4>
-        <div className="flex flex-wrap gap-2">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            iconName="Calendar"
-            iconPosition="left"
-            onClick={() => {
-              const today = new Date()?.toISOString()?.split('T')?.[0];
-              handleInputChange('applicationDate', today);
-            }}
-          >
-            Set Today
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            iconName="MapPin"
-            iconPosition="left"
-            onClick={() => handleInputChange('location', 'Remote')}
-          >
-            Remote
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            iconName="Target"
-            iconPosition="left"
-            onClick={() => handleInputChange('status', 'wishlist')}
-          >
-            Wishlist
-          </Button>
         </div>
       </div>
     </div>

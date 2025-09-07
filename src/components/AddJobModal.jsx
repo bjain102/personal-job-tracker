@@ -264,9 +264,9 @@ const AddJobModal = ({ isOpen, onClose, onSave, job = null, isEditing = false })
       {/* Modal Backdrop */}
       <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm animate-fade-in">
         {/* Modal Container */}
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4">
-            <div className="bg-surface border border-border rounded-xl shadow-tier-3 w-full max-w-4xl max-h-[90vh] overflow-hidden animate-slide-up">
+        <div className="fixed inset-0 z-50 overflow-y-auto pt-18">
+          <div className="flex min-h-full items-start justify-center p-4 pt-8">
+            <div className="bg-surface border border-border rounded-xl shadow-tier-3 w-full max-w-4xl max-h-[85vh] overflow-hidden animate-slide-up">
               
               {/* Modal Navigation */}
               <ModalNavigation
